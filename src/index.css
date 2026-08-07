@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+body{
+    font-family: "Inter", sans-serif;
+}
+
+.progress-bar{
+    width: 100%;
+    height: 8px;
+}
+
+.progress-bar::-webkit-progress-bar{
+    background-color: #D9E3F6;
+    border-radius: 9px;
+}
+
+.progress-bar::-webkit-progress-value{
+    background-color: #006C49;
+    border-radius: 9px;
+    border: 1px solid black;
+}
