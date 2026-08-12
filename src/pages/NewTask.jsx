@@ -17,7 +17,7 @@ export default function NewTask() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDesc, setTaskDesc] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
-  const [taskDate, setTaskDate] = useState(null);
+  const [taskDate, setTaskDate] = useState(new Date());
   const [selectCategory, setSelectCategory] = useState("work");
   const [successPopup, setSuccessPopup] = useState(false);
   const [newCategory, setNewCategory] = useState("");
@@ -101,7 +101,7 @@ export default function NewTask() {
       {newCategoryPopup && <NewCategoryPopup />}
 
       {/* Success Popup */}
-      {successPopup && <SuccessPopup />}
+      {successPopup && <SuccessPopup setSuccessPopup={setSuccessPopup} />}
     </>
   );
 }
