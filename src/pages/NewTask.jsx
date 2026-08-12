@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router";
 import { X, ChevronRight } from "lucide-react";
 import Calendar from "react-calendar";
-
 import TaskContext from "../context/TaskContext";
 import NewTaskForm from "../components/NewTaskForm";
 import TaskDatePicker from "../components/TaskDatePicker";
@@ -12,18 +11,17 @@ import NewCategoryPopup from "../components/NewCategoryPopup";
 
 export default function NewTask() {
   const {
-    setTasks,
-    taskTitle,
-    taskDesc,
-    taskDate,
-    showCalendar,
-    setTaskDate,
-    setShowCalendar,
-    selectCategory,
-    setSuccessPopup,
-    successPopup,
-    newCategoryPopup,
+    setTasks
   } = useContext(TaskContext);
+
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDesc, setTaskDesc] = useState("");
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [taskDate, setTaskDate] = useState(null);
+  const [selectCategory, setSelectCategory] = useState("work");
+  const [successPopup, setSuccessPopup] = useState(false);
+  const [newCategory, setNewCategory] = useState("");
+  const [newCategoryPopup, setNewCategoryPopup] = useState(false);
 
   function handleCreateTask() {
     if (!taskTitle.trim()) {
@@ -48,8 +46,6 @@ export default function NewTask() {
     console.log("Task Created");
   }
 
-
-
   useEffect(() => {
     const shouldLockScroll = showCalendar || successPopup;
 
@@ -71,9 +67,9 @@ export default function NewTask() {
             New Task
           </h1>
         </div>
-        <NewTaskForm />
-        <TaskDatePicker />
-        <CategorySelector />
+        <NewTaskForm taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDesc={taskDesc} setTaskDesc={setTaskDesc} />
+        <TaskDatePicker showCalendar={showCalendar} setShowCalendar={setShowCalendar} taskDate={taskDate} setTaskDate={setTaskDate} />
+        <CategorySelector selectCategory={selectCategory} setSelectCategory={setSelectCategory} newCategory={newCategory} setNewCategory={setNewCategory} setNewCategoryPopup={setNewCategoryPopup} />
       </div>
       <div className="fixed w-full bottom-8 px-5">
         <button
@@ -102,14 +98,10 @@ export default function NewTask() {
       )}
 
       {/* New Category Popup */}
-      {newCategoryPopup && (
-        <NewCategoryPopup />
-      )}
+      {newCategoryPopup && <NewCategoryPopup />}
 
       {/* Success Popup */}
-      {successPopup && (
-        <SuccessPopup />
-      )}
+      {successPopup && <SuccessPopup />}
     </>
   );
 }

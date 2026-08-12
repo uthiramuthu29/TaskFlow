@@ -1,10 +1,39 @@
-import { useContext } from "react";
-import TaskContext from "../context/TaskContext";
 import { CalendarDays, ChevronRight } from "lucide-react";
 
-export default function TaskDatePicker(){
+export default function TaskDatePicker({ setShowCalendar, taskDate }){
 
-    const { setShowCalendar, taskDate, getDateLabel } = useContext(TaskContext);
+  
+
+  const getDateLabel = (date) => {
+    if (!date) return "Select a date";
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const selectedDate = new Date(date);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    const difference = (selectedDate - today) / (1000 * 60 * 60 * 24);
+
+    if (difference === 0) {
+      return "Today";
+    }
+
+    if (difference === -1) {
+      return "Yesterday";
+    }
+
+    if (difference === 1) {
+      return "Tomorrow";
+    }
+
+    if (difference > 1) {
+      return `${difference} days from now`;
+    }
+
+    return `${Math.abs(difference)} days ago`;
+  };
 
     return(
         <div

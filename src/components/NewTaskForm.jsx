@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import TaskContext from "../context/TaskContext";
+export default function NewTaskForm({ taskTitle, setTaskTitle, taskDesc, setTaskDesc }){
 
-export default function NewTaskForm(){
-
-    const { taskTitle, setTaskTitle, taskDesc, setTaskDesc } = useContext(TaskContext);
-
+    
     return(
         <div className="mt-4 mb-10">
           <input

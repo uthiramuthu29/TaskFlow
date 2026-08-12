@@ -2,9 +2,9 @@ import { useContext } from "react"
 import { BriefcaseBusiness, UserRound, ShoppingCart, Tag, Plus } from "lucide-react";
 import TaskContext from "../context/TaskContext";
 
-export function CategorySelector(){
+export function CategorySelector({ selectCategory, setSelectCategory, setNewCategoryPopup }){
 
-    const { categories, selectCategory, setSelectCategory, setNewCategoryPopup} = useContext(TaskContext);
+    const { categories } = useContext(TaskContext);
 
     const categoryIcons = {
         work: BriefcaseBusiness,
