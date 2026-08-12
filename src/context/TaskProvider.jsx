@@ -11,12 +11,21 @@ export default function TaskProvider({ children }){
     const upcomingTasks = tasks.filter((task) => !task.completed);
     const completedTasks = tasks.filter((task) => task.completed);
 
+    const [categories, setCategories] = useState(()=>{
+        const storedCategories = localStorage.getItem("categories");
+        return storedCategories ? JSON.parse(storedCategories) : ["work", "personal", "shopping"];
+    });
+
     useEffect(()=>{
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }, [tasks])
 
+    useEffect(()=>{
+        localStorage.setItem("categories", JSON.stringify(categories))
+    }, [categories])
+
     return (
-        <TaskContext.Provider value={{tasks, setTasks, upcomingTasks, completedTasks}}>
+        <TaskContext.Provider value={{tasks, setTasks, categories, setCategories, upcomingTasks, completedTasks}}>
             {children}
         </TaskContext.Provider>
     )

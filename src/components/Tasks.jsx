@@ -47,7 +47,7 @@ export default function Tasks() {
                     <Clock size={13} />
                     {new Date(task.dueDate).toLocaleDateString()}
                     <span className="bg-[#E6EEFF] text-[#424754] text-[12px] leading-4 font-semibold px-2 py-0.5 ml-1 rounded-lg capitalize">
-                      {task.category}
+                      {task.selectCategory}
                     </span>
                   </p>
                 </div>
